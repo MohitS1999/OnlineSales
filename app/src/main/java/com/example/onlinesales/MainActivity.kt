@@ -19,22 +19,18 @@ private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel by viewModels<MainViewModel>()
-    private lateinit var db:HistoryDB
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: ")
         binding =ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var list = mutableListOf<History>()
-        list.add(History(1,"mohit","mohit","15march2022"))
-        list.add(History(1,"sahil","lofi","18april2022"))
-        list.add(History(1,"saifi","coffee","15march2022"))
-        list.add(History(1,"kulu","mohit","15march2022"))
-        list.add(History(1,"yugal","mohit","15march2022"))
-        db = Room.databaseBuilder(applicationContext,HistoryDB::class.java,"historyDB").build()
-        GlobalScope.launch(Dispatchers.IO) {
-             db.getHistoryDao().insertHistory(History(0,"mohit","singh","24april2023"))
-        }
-        //viewModel.saveData(list)
+        val list = mutableListOf<History>()
+        list.add(History(0,"mohit","mohit","15march2022"))
+        list.add(History(0,"sahil","lofi","18april2022"))
+        list.add(History(0,"saifi","coffee","15march2022"))
+        list.add(History(0,"kulu","mohit","15march2022"))
+        //list.add(History(1,"yugal","mohit","15march2022"))
+
+        viewModel.saveData(list)
     }
 }
