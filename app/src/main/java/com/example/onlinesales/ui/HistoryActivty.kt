@@ -25,6 +25,8 @@ class HistoryActivty : AppCompatActivity() {
         setContentView(binding.root)
         historyList = (intent?.extras?.getSerializable("historyList") as? ArrayList<History>)!!
         Log.d(TAG, "onCreate: $historyList")
+        // for showing the latest data
+        historyList.reverse()
         updateRecyclerView()
     }
     private fun updateRecyclerView(){
