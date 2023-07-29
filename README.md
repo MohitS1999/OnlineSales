@@ -7,6 +7,12 @@ Welcome to OnlineSales.ai Android app! | Calculator
 
 - Android OS version 5.0 or newer
 
+
+
+### Installing the App on your Android Device
+
+Just download our latest version [OnlineSales.apk](https://github.com/MohitS1999/OnlineSales/blob/master/app-debug.apk) and follow the on-screen prompts on your device.
+
  ### Benefits
 - Get the result of multiple queries in a seconds on your fingers
 - Easy to use
