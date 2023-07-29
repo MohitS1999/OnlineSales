@@ -30,6 +30,11 @@ class DatabaseRepositoryImp(
         return mathApi.getData(data)
     }
 
+    override suspend fun getDataFromDB(): List<History> {
+        return database.getHistoryDao().getHistoryData()
+    }
+
+
 
 
 }

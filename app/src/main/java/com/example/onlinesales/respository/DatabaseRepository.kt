@@ -8,4 +8,7 @@ import retrofit2.Response
 interface DatabaseRepository {
     suspend fun saveDataInDatabase(list:List<History>)
     suspend fun getResultFromApi(data:RequestBody) : Response<ResultBody>
+
+    suspend fun getDataFromDB() : List<History>
+
 }

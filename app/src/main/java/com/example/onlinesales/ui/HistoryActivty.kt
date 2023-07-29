@@ -3,6 +3,7 @@ package com.example.onlinesales.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +28,14 @@ class HistoryActivty : AppCompatActivity() {
         Log.d(TAG, "onCreate: $historyList")
         // for showing the latest data
         historyList.reverse()
+
         updateRecyclerView()
+
+        // go to the previous activity
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
+
     }
     private fun updateRecyclerView(){
         Log.d(TAG, "updateRecyclerView: ")

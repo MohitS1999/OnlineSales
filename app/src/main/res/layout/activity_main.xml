@@ -30,6 +30,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
             android:src="@drawable/history"
             android:layout_weight="0.4"
             android:background="@null"
@@ -71,26 +72,38 @@
 
 
     <LinearLayout
+        android:id="@+id/middleLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/clearBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CLEAR"
+            android:layout_weight="1"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/_15sdp"
+
+            android:textSize="@dimen/_15sdp"/>
+        <Button
             android:id="@+id/submitBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:text="SUBMIT"
-            android:backgroundTint="@color/white"
-            android:drawableTint="@color/white"
+            android:layout_gravity="end"
             android:layout_weight="3"
+            android:layout_marginEnd="@dimen/_15sdp"
+
             android:textSize="@dimen/_15sdp"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="clear"
-            android:textSize="@dimen/_15sdp"/>
+
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/outputText"
@@ -130,5 +143,6 @@
 
 
     </com.google.android.material.textfield.TextInputLayout>
+
 
 </LinearLayout>

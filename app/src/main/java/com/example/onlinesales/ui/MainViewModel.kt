@@ -22,11 +22,19 @@ class MainViewModel  @Inject constructor(
 
      fun saveData(list:List<History>){
          Log.d(TAG, "saveData: ${dbRepository.javaClass.name} size := ${list.size}")
-
             viewModelScope.launch (Dispatchers.IO){
                 dbRepository.saveDataInDatabase(list)
             }
      }
+    fun getDataFromDB():List<History>{
+        var result = emptyList<History>()
+        viewModelScope.launch (Dispatchers.IO){
+            result = dbRepository.getDataFromDB()
+        }
+        Thread.sleep(500)
+        return result
+    }
+
 
 
     fun callApi(data:List<String>) : List<String>{
@@ -36,9 +44,6 @@ class MainViewModel  @Inject constructor(
         }
         Thread.sleep(1000)
         return result
-
-
-
 
     }
 }

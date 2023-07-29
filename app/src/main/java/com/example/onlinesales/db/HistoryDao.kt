@@ -20,6 +20,6 @@ interface HistoryDao {
     suspend fun deleteAll()
 
     @Query("select * from history")
-    fun getContact(): LiveData<List<History>>
+    suspend fun getHistoryData(): List<History>
 
 }
