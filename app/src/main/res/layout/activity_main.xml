@@ -104,10 +104,10 @@
         android:id="@+id/output_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="false"
         android:layout_margin="@dimen/_5sdp"
         android:hint=" "
         app:layout_constraintLeft_toLeftOf="parent"
+        android:scrollbars="vertical"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -120,6 +120,9 @@
             android:hint="e.g :- sqrt(5^2 - 4^2) => 3"
             android:inputType="textMultiLine"
             android:overScrollMode="always"
+            android:enabled="true"
+            android:focusableInTouchMode="false"
+
             android:textSize="@dimen/_15sdp"
             android:padding="@dimen/_10sdp"
             android:scrollbarStyle="insideInset"

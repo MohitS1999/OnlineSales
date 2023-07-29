@@ -9,6 +9,7 @@ import com.example.onlinesales.model.RequestBody
 import com.example.onlinesales.respository.DatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,26 +27,16 @@ class MainViewModel  @Inject constructor(
                 dbRepository.saveDataInDatabase(list)
             }
      }
-    init {
-        callApi()
 
-    }
 
-    private fun callApi() {
-        val list = arrayListOf<String>()
-        list.add("a = 1.2 * (2 + 4.5)")
-        list.add("a = 1.2 * (2 + 4.5)")
-        list.add("a = 1.2 * (2 + 4.5)")
-        list.add("a = 1.2 * (2 + 4.5)")
-        list.add("a = 1.2 * (2 + 4.5)")
-        list.add("a = 1.2 * (2 + 4.5)")
-        list.add("a = 1.2 * (2 + 4.5)")
-        list.add("a = 1.2 * (2 + 4.5)")
+    fun callApi(data:List<String>) : List<String>{
+        var result = emptyList<String>()
         viewModelScope.launch(Dispatchers.IO) {
-            Log.d(TAG, "callApi: $list")
-            val response = dbRepository.getResultFromApi(RequestBody(list,14))
-            Log.d(TAG, "callApi: ${response.body()}")
+           result = dbRepository.getResultFromApi(RequestBody(data, 14)).body()?.result ?: emptyList()
         }
+        Thread.sleep(1000)
+        return result
+
 
 
 
