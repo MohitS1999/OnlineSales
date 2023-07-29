@@ -10,19 +10,19 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    // it will provide the object of room database
     @Singleton
     @Provides
     fun provideHistoryDB(app:Application) : HistoryDB{
         return Room.databaseBuilder(app,HistoryDB::class.java,"historyDB").build()
     }
-
+    //IT will provide the object of retrofit API
     @Provides
     @Singleton
     fun providesRetrofit() : MathApi =

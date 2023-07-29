@@ -20,12 +20,14 @@ class MainViewModel  @Inject constructor(
     private val dbRepository: DatabaseRepository
 ) :ViewModel(){
 
+    // call the database
      fun saveData(list:List<History>){
          Log.d(TAG, "saveData: ${dbRepository.javaClass.name} size := ${list.size}")
             viewModelScope.launch (Dispatchers.IO){
                 dbRepository.saveDataInDatabase(list)
             }
      }
+    // call the database
     fun getDataFromDB():List<History>{
         var result = emptyList<History>()
         viewModelScope.launch (Dispatchers.IO){
@@ -36,7 +38,7 @@ class MainViewModel  @Inject constructor(
     }
 
 
-
+    // call the Math api
     fun callApi(data:List<String>) : List<String>{
         var result = emptyList<String>()
         viewModelScope.launch(Dispatchers.IO) {

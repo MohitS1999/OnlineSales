@@ -19,17 +19,18 @@ class DatabaseRepositoryImp(
     private val mathApi: MathApi
 ) : DatabaseRepository{
 
+    // this is helps to save the data into the database
     override suspend fun saveDataInDatabase(list:List<History>) {
         Log.d(TAG, "saveDataInDatabase: ${list.size}")
         database.getHistoryDao().insertHistory(list)
 
     }
-
+    // this will helps to get the data from the api
     override suspend fun getResultFromApi(data:RequestBody) : Response<ResultBody>{
         Log.d(TAG, "getResultFromApi: ${mathApi.javaClass.name}")
         return mathApi.getData(data)
     }
-
+    // this will helps to get the data from database
     override suspend fun getDataFromDB(): List<History> {
         return database.getHistoryDao().getHistoryData()
     }

@@ -24,6 +24,7 @@ class HistoryActivty : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryActivtyBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // take the data from first activity
         historyList = (intent?.extras?.getSerializable("historyList") as? ArrayList<History>)!!
         Log.d(TAG, "onCreate: $historyList")
         // for showing the latest data
@@ -37,6 +38,7 @@ class HistoryActivty : AppCompatActivity() {
         }
 
     }
+    // for updating the recyclerview
     private fun updateRecyclerView(){
         Log.d(TAG, "updateRecyclerView: ")
         historyRecyclerView = binding.historyRV

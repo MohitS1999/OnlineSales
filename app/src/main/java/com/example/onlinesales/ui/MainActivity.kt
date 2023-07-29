@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
+        // when we click on the history button
         binding.historyBtn.setOnClickListener {
             Log.d(TAG, "onCreate: history button click")
 
@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 
             })
         }
+        // when we click on the submit button
         binding.submitBtn.setOnClickListener {
             val stringList = binding.inputField.text.toString().split("\n")
             binding.inputField.setText("")
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.VISIBLE
             binding.middleLL.visibility = View.GONE
 
+            //calling the math api
             val resFromApi = viewModel.callApi(stringList)
             Handler().postDelayed(
                 Runnable { binding.progressBar.visibility = View.GONE
@@ -59,13 +61,17 @@ class MainActivity : AppCompatActivity() {
             )
             Log.d(TAG, "onCreate:submit button $resFromApi")
 
+            // if the list is empty
             if (resFromApi.isEmpty()){
                 binding.outputField.setText("Please Enter Correct Expression")
             }else{
+                // if list is not empty
                 val history = mutableListOf<History>()
                 for (i in stringList.indices){
                     history.add(History(0,stringList[i],resFromApi[i],java.time.LocalDate.now().toString()))
                 }
+
+                // save the data into db
                 viewModel.saveData(history)
                 val stringBuilder = StringBuilder()
                 for(i in history.indices){
@@ -76,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             //var resultString = emptyArray()
         }
 
-
+        //when we click on the clear button
         binding.clearBtn.setOnClickListener {
             binding.inputField.setText("")
             binding.outputField.setText("")

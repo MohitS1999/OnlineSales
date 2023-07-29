@@ -13,7 +13,7 @@ interface MathApi {
     companion object{
         val BASE_URL = "http://api.mathjs.org/"
     }
-
+    //it will send the request to server and get the data
     @POST("v4/")
     suspend fun getData(@Body jsonData:RequestBody) : Response<ResultBody>
 
