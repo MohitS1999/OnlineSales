@@ -56,7 +56,6 @@
             android:id="@+id/input_field"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
-            android:background="@color/grey"
             android:gravity="top"
             android:hint="e.g :- sqrt(5^2 - 4^2)"
 
@@ -111,6 +110,7 @@
         android:layout_height="wrap_content"
         android:text="Output"
         android:layout_margin="@dimen/_5sdp"
+        android:shadowRadius="@integer/material_motion_duration_long_2"
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold"/>
     <com.google.android.material.textfield.TextInputLayout
