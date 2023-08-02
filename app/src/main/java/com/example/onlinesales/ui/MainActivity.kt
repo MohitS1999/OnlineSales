@@ -46,29 +46,52 @@ class MainActivity : AppCompatActivity() {
         }
         // when we click on the submit button
         binding.submitBtn.setOnClickListener {
-            val stringList = binding.inputField.text.toString().split("\n")
+            var stringList = binding.inputField.text.toString().split("\n")
             binding.inputField.setText("")
             binding.outputField.setText("")
             binding.progressBar.visibility = View.VISIBLE
             binding.middleLL.visibility = View.GONE
 
+            // creating the new duplicate list for iterating 50-50
+            var duplicateStringList = mutableListOf<String>()
+            duplicateStringList.addAll(stringList)
+            var resultFromAPI = mutableListOf<String>()
+            Log.d(TAG, "onCreate: list :-      $duplicateStringList")
+            while (duplicateStringList.isNotEmpty()){
+                if (duplicateStringList.size <= 50){
+                    Log.d(TAG, "onCreate: if stringlist is less than 50")
+                    resultFromAPI.addAll(viewModel.callApi(duplicateStringList))
+                    Handler().postDelayed(
+                        Runnable { binding.progressBar.visibility = View.GONE
+                            binding.middleLL.visibility = View.VISIBLE},
+                        500
+                    )
+                    duplicateStringList.clear()
+                }else{
+                    Log.d(TAG, "onCreate: if stringlist is greater than 50")
+                    val chunkList = duplicateStringList.take(50)
+                    duplicateStringList = duplicateStringList.drop(50).toMutableList()
+                    resultFromAPI.addAll(viewModel.callApi(chunkList))
+                    Handler().postDelayed(
+                        Runnable { binding.progressBar.visibility = View.GONE
+                            binding.middleLL.visibility = View.VISIBLE},
+                        500
+                    )
+
+                }
+            }
             //calling the math api
-            val resFromApi = viewModel.callApi(stringList)
-            Handler().postDelayed(
-                Runnable { binding.progressBar.visibility = View.GONE
-                    binding.middleLL.visibility = View.VISIBLE},
-                500
-            )
-            Log.d(TAG, "onCreate:submit button $resFromApi")
+
+            Log.d(TAG, "onCreate:submit button $resultFromAPI")
 
             // if the list is empty
-            if (resFromApi.isEmpty()){
+            if (resultFromAPI.isEmpty()){
                 binding.outputField.setText("Please Enter Correct Expression")
             }else{
                 // if list is not empty
                 val history = mutableListOf<History>()
                 for (i in stringList.indices){
-                    history.add(History(0,stringList[i],resFromApi[i],java.time.LocalDate.now().toString()))
+                    history.add(History(0,stringList[i],resultFromAPI[i],java.time.LocalDate.now().toString()))
                 }
 
                 // save the data into db
@@ -95,4 +118,6 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-    }
+
+
+}
